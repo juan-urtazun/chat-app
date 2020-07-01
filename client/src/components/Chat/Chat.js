@@ -7,20 +7,28 @@ import './Chat.css';
 import InfoBar from '../InfoBar/InfoBar';
 import Input from '../Input/Input';
 import Messages from '../Messages/Messages';
+import RoomUsers from '../RoomUsers/RoomUsers';
 
 let socket;
 const Chat = ({ location }) => {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
+  const [users, setUsers] = useState([]);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const [error, setError] = useState(null);
   const ENDPOINT = "localhost:5000";
+
   useEffect(() => {
     const { name, room } = queryString.parse(location.search);
     setName(name);
     setRoom(room);
     socket = io(ENDPOINT);
-    socket.emit("join", { name, room }, () => {});
+    socket.emit("join", { name, room }, (error) => {
+      if(error){
+        setError(error)
+      }
+    });
 
     return () => {
       socket.emit("disconnect");
@@ -34,6 +42,12 @@ const Chat = ({ location }) => {
     });
   }, [messages]);
 
+  useEffect(() => {
+    socket.on("roomData", (data) => {
+      setUsers([...data.users]);
+    });
+  }, []);
+
   const sendMessage = (event)=>{
     event.preventDefault();
 
@@ -41,7 +55,6 @@ const Chat = ({ location }) => {
       socket.emit('sendMessage', message, () => setMessage(''))
     }
   }
-
   return (
     <div className="outerContainer">
       <div className="container">
@@ -55,7 +68,7 @@ const Chat = ({ location }) => {
           setMessage={setMessage}
           sendMessage={sendMessage}
         />
- 
+        <RoomUsers users={users} joinedUserName={name} />
       </div>
     </div>
   );
