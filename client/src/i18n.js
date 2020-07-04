@@ -11,7 +11,7 @@ i18n
     resources: {
       en: {
         translation: {
-          join: "Join",
+          join: "Let's chat",
           "Sing In": "Sing In",
           "Name": "name",
           "Room name": "Room name" ,
@@ -21,10 +21,10 @@ i18n
       },
       es: {
         translation: {
-          join: "Unirse",
+          join: "Chateamos un rato?",
           "Sing In": "Ingresar",
-          "Name": "Nombre",
-          "Room name": "Nombre de la sala",
+          "Name": "Ingrese un apodo",
+          "Room name": "Ingresa el nombre de la sala",
           "Type a message": "Escriba un mesaje...",
           "Send": "Enviar"
         },
