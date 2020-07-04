@@ -13,20 +13,24 @@ i18n
         translation: {
           join: "Let's chat",
           "Sing In": "Sing In",
-          "Name": "name",
-          "Room name": "Room name" ,
+          Name: "name",
+          "Room name": "Room name",
+          "Join to the room name": "Join to the room name: ${room}",
           "Type a message": "Type a message...",
-          "Send": "Send"
+          Send: "Send",
+          "share link": "Copy and share with friends ",
         },
       },
       es: {
         translation: {
           join: "Chateamos un rato?",
           "Sing In": "Ingresar",
-          "Name": "Ingrese un apodo",
+          Name: "Ingrese un apodo",
           "Room name": "Ingresa el nombre de la sala",
+          "Join to the room name": "Te vas a unir a la sala: {{room}}",
           "Type a message": "Escriba un mesaje...",
-          "Send": "Enviar"
+          Send: "Enviar",
+          "share link": "Copia y compartí el link para chatear ",
         },
       },
     },

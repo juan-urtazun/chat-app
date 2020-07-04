@@ -1,9 +1,8 @@
 .roomUsers{
   display: flex;
   flex-wrap: wrap;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   padding: 10px;
-  background-color: #ba68c8 ;
   min-height: 50px;
 }
 

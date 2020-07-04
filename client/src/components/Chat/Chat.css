@@ -10,12 +10,74 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 8px;
   height: 60%;
   width: 35%;
 }
+.room-info-wrapper {
+  text-align: center;
+  background-color: #4db6ac;
+}
+.share-wrapper {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.share-wrapper img{
+  margin: 0 5px;
+}
+.share {
+  user-select: all;
+}
+/* Hover, Focus */
+.share:hover,
+.share:focus {
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12);
+}
 
+.share:hover::before {
+  opacity: 0.08;
+}
+
+.share:focus::before {
+  opacity: 0.24;
+}
+
+.share:hover:focus::before {
+  opacity: 0.3;
+}
+
+/* Active */
+.share:active {
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.share:active::after {
+  opacity: 0.32;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0s;
+}
+
+/* Disabled */
+.pure-material-button-contained:disabled {
+  color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.38);
+  background-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.12);
+  box-shadow: none;
+  cursor: initial;
+}
+
+.pure-material-button-contained:disabled::before {
+  opacity: 0;
+}
+
+.pure-material-button-contained:disabled::after {
+  opacity: 0;
+}
 @media (min-width: 320px) and (max-width: 480px) {
   .outerContainer {
     height: 100%;
