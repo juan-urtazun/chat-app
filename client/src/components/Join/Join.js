@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 import "./Join.css";
 
 const enterHandler = (setValue, next, action = "focus") => {
@@ -16,6 +18,8 @@ const enterHandler = (setValue, next, action = "focus") => {
 const setValueFromEvent = (setValue) => event =>  setValue(event.target.value)
 
 const Join = () => {
+  const { t } = useTranslation();
+
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
   const roomInput = useRef(null);
@@ -24,12 +28,12 @@ const Join = () => {
   return (
     <div className="joinOuterContainer">
       <div className="joinInnerContainer">
-        <h1 className="heading">Join</h1>
+        <h1 className="heading"> {t("join")}</h1>
         <div>
           <input
             type="text"
             className="joinInput"
-            placeholder="name"
+            placeholder={t("Name")}
             onChange={setValueFromEvent(setName)}
             onKeyPress={enterHandler(setName, roomInput)}
           />
@@ -38,7 +42,7 @@ const Join = () => {
           <input
             type="text"
             className="joinInput mt-20"
-            placeholder="room"
+            placeholder={t("Room name")}
             ref={roomInput}
             onChange={setValueFromEvent(setRoom)}
             onKeyPress={enterHandler(setRoom, submitBtn, "click")}
@@ -50,7 +54,7 @@ const Join = () => {
           onClick={(event) => (preventsSingIn ? event.preventDefault() : null)}
         >
           <button className="button mt-20" type="submit">
-            Sing In
+            {t("Sing In")}
           </button>
         </Link>
       </div>
