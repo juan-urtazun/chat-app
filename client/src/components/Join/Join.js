@@ -1,9 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./Join.css";
+
+const enterHandler = (setValue, next, action = "focus") => {
+  return (event) => {
+    if (event.key === "Enter") {
+      setValue(event.target.value);
+      if (next) {
+        next.current[action]();
+      }
+    }
+  };
+};
+
+const setValueFromEvent = (setValue) => event =>  setValue(event.target.value)
+
 const Join = () => {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
+  const roomInput = useRef(null);
+  const submitBtn = useRef(null);
   const preventsSingIn = !name || !room;
   return (
     <div className="joinOuterContainer">
@@ -14,9 +30,8 @@ const Join = () => {
             type="text"
             className="joinInput"
             placeholder="name"
-            onChange={(event) => {
-              setName(event.target.value);
-            }}
+            onChange={setValueFromEvent(setName)}
+            onKeyPress={enterHandler(setName, roomInput)}
           />
         </div>
         <div>
@@ -24,12 +39,13 @@ const Join = () => {
             type="text"
             className="joinInput mt-20"
             placeholder="room"
-            onChange={(event) => {
-              setRoom(event.target.value);
-            }}
+            ref={roomInput}
+            onChange={setValueFromEvent(setRoom)}
+            onKeyPress={enterHandler(setRoom, submitBtn, "click")}
           />
         </div>
         <Link
+          ref={submitBtn}
           to={`/chat?name=${name}&room=${room}`}
           onClick={(event) => (preventsSingIn ? event.preventDefault() : null)}
         >
