@@ -19,6 +19,7 @@ i18n
           "Type a message": "Type a message...",
           Send: "Send",
           "share link": "Copy and share with friends ",
+          "Connected users": "Connected users",
         },
       },
       es: {
@@ -31,6 +32,7 @@ i18n
           "Type a message": "Escriba un mesaje...",
           Send: "Enviar",
           "share link": "Copia y compartí el link para chatear ",
+          "Connected users": "Usuarios conectados",
         },
       },
     },

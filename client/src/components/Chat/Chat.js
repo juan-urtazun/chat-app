@@ -68,6 +68,7 @@ const Chat = ({ room, name }) => {
             sendMessage={sendMessage}
           />
           <div className="room-info-wrapper">
+            <p className="border-bottom p-b-5">{t("Connected users")}</p>
             <RoomUsers users={users} joinedUserName={name} />
             <div className="share-wrapper">
               <span>{t("share link")}</span> {ReactEmoji.emojify(":)")}
