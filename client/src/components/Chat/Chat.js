@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import queryString from "query-string";
+import { Redirect } from "react-router-dom";
 import io from "socket.io-client";
 
 import './Chat.css';
@@ -8,9 +8,9 @@ import InfoBar from '../InfoBar/InfoBar';
 import Input from '../Input/Input';
 import Messages from '../Messages/Messages';
 import RoomUsers from '../RoomUsers/RoomUsers';
-
 let socket;
-const Chat = ({ location }) => {
+
+const Chat = ({ location}) => {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
   const [users, setUsers] = useState([]);
@@ -18,14 +18,14 @@ const Chat = ({ location }) => {
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState(null);
   const ENDPOINT = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
-    const { name, room } = queryString.parse(location.search);
     setName(name);
     setRoom(room);
     socket = io(ENDPOINT);
     socket.emit("join", { name, room }, (error) => {
-      if(error){
-        setError(error)
+      if (error) {
+        setError(error);
       }
     });
 
@@ -47,30 +47,31 @@ const Chat = ({ location }) => {
     });
   }, []);
 
-  const sendMessage = (event)=>{
+  const sendMessage = (event) => {
     event.preventDefault();
 
-    if(message){
-      socket.emit('sendMessage', message, () => setMessage(''))
+    if (message) {
+      socket.emit("sendMessage", message, () => setMessage(""));
     }
-  }
-  return (
-    <div className="outerContainer">
-      <div className="container">
-        <InfoBar room={room}/>
-        <Messages
-          messages={messages}
-          name={name}
-        />
-        <Input 
-          message={message}
-          setMessage={setMessage}
-          sendMessage={sendMessage}
-        />
-        <RoomUsers users={users} joinedUserName={name} />
+  };
+  if (error) {
+    return <Redirect to="/" />;
+  } else {
+    return (
+      <div className="outerContainer">
+        <div className="container">
+          <InfoBar room={room} />
+          <Messages messages={messages} name={name} />
+          <Input
+            message={message}
+            setMessage={setMessage}
+            sendMessage={sendMessage}
+          />
+          <RoomUsers users={users} joinedUserName={name} />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default Chat;
