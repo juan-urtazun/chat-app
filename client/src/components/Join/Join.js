@@ -1,6 +1,8 @@
 import React, { useState, useRef } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import queryString from "query-string";
+
 import "./Join.css";
 
 const enterHandler = (setValue, next, action = "focus") => {
@@ -14,11 +16,11 @@ const enterHandler = (setValue, next, action = "focus") => {
   };
 };
 
-const setValueFromEvent = (setValue) => event =>  setValue(event.target.value)
+const setValueFromEvent = (setValue) => (event) => setValue(event.target.value);
 
-const Join = () => {
+const Join = ({location}) => {
   const { t } = useTranslation();
-  const {room} = useParams();
+  const { room } = queryString.parse(location.search);
   const [name, setName] = useState("");
   const [roomName, setRoomName] = useState("");
   const roomInput = useRef(null);
@@ -51,7 +53,7 @@ const Join = () => {
         </div>
         <Link
           ref={submitBtn}
-          to={`/chat?name=${name}&room=${roomName||room}`}
+          to={`/chat?name=${name}&room=${roomName || room}`}
           onClick={(event) => (preventsSingIn ? event.preventDefault() : null)}
         >
           <button className="button mt-20" type="submit">

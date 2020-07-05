@@ -9,7 +9,6 @@ import ChatRoom from './components/ChatRoom/ChatRoom';
 const App = () => (
   <Router>
     <Route path="/" exact component={Join} />
-    <Route path="/room/:room" component={Join} />
     <Route path="/chat" component={ChatRoom} />
   </Router>
 );

@@ -7,7 +7,8 @@ import  Chat  from "../Chat/Chat";
 const ChatRoom = () => {
   const location = useLocation();
   const { name, room } = queryString.parse(location.search);
-  return name && room ? <Chat name={name} room={room} /> : <Redirect to="/" />;
+  const redirectTo = room ? `/?room=${room}` : '/';
+  return (name && room) ? <Chat name={name} room={room} /> : <Redirect to={redirectTo} />;
 }
 
 export default ChatRoom;

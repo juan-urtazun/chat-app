@@ -10,11 +10,11 @@ import InfoBar from "../InfoBar/InfoBar";
 import Input from "../Input/Input";
 import Messages from "../Messages/Messages";
 import RoomUsers from "../RoomUsers/RoomUsers";
-import Spinner from "../Spinner/Spinner";
+
 let socket;
 const HOST_NAME = process.env.REACT_APP_SHARE_ROOM;
 const Chat = ({ room, name }) => {
-  const shareLink = `${HOST_NAME}/${room}`;
+  const shareLink = `${HOST_NAME}/?room=${room}`;
   const { t } = useTranslation();
   const [users, setUsers] = useState([]);
   const [message, setMessage] = useState("");
